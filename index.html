@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Surprise ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: pink;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      margin-top: 80px;
+      font-size: 2.5rem;
+      animation: fadeIn 2s ease;
+    }
+
+    .buttons {
+      margin-top: 50px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background: red;
+      color: white;
+    }
+
+    #noBtn {
+      background: white;
+      color: black;
+      position: absolute;
+    }
+
+    #msg {
+      margin-top: 40px;
+      font-size: 1.5rem;
+      color: darkred;
+    }
+
+    /* Smooth animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Heart floating animation */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 25px;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-800px); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>💖 Will You Be My Valentine? 💖</h1>
+
+  <div class="buttons">
+    <button id="yesBtn" onclick="goYes()">YES ❤️</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 😭</button>
+  </div>
+
+  <p id="msg"></p>
+
+  <script>
+    let noMessages = [
+      "Oii don't do that 😭",
+      "Try again 😂",
+      "No is not allowed 😈",
+      "You sure?? 👀",
+      "Come on say YES ❤️",
+      "Stop running behind NO 😭🤣"
+    ];
+
+    let msgIndex = 0;
+
+    function moveNo() {
+      let noBtn = document.getElementById("noBtn");
+
+      // Move button randomly
+      let x = Math.random() * (window.innerWidth - 100);
+      let y = Math.random() * (window.innerHeight - 100);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      // Show funny messages
+      document.getElementById("msg").innerText =
+        noMessages[msgIndex];
+
+      msgIndex = (msgIndex + 1) % noMessages.length;
+    }
+
+    function goYes() {
+      window.location.href = "yes.html";
+    }
+
+    // Floating hearts effect
+    setInterval(() => {
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }, 500);
+  </script>
+
+</body>
+</html>
